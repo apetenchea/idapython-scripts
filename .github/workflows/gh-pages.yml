@@ -32,3 +32,5 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
