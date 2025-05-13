@@ -1,7 +1,6 @@
 import argparse
 import ast
 from pathlib import Path
-import shutil
 import yaml
 
 
@@ -92,7 +91,6 @@ def convert(input_root: Path, output_root: Path):
     for script in input_root.rglob("*.py"):
         convert_file(script, input_root, output_root, nav_map)
     convert_mkdocs(nav_map)
-    shutil.copy("index.md", output_root / "index.md")
 
 
 def main():
