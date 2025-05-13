@@ -65,7 +65,29 @@ def convert_file(py_path: Path, input_root: Path, output_root: Path, nav_map: di
 def convert_mkdocs(nav_map: dict):
     mk = {
         "site_name": "IDAPython Scripts",
-        "theme": {"name": "material"},
+        "theme": {
+            "name": "material",
+            "palette": [
+                {
+                    "scheme": "slate",
+                    "primary": "blue",
+                    "accent": "indigo",
+                    "toggle": {
+                        "icon": "material/weather-sunny",
+                        "name": "Switch to light mode",
+                    }
+                },
+                {
+                    "scheme": "default",
+                    "primary": "blue",
+                    "accent": "indigo",
+                    "toggle": {
+                        "icon": "material/weather-night",
+                        "name": "Switch to dark mode",
+                    }
+                },
+            ],
+        },
         "nav": []
     }
 

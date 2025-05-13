@@ -179,3 +179,4 @@ cython_debug/
 # Documentation files
 docs/*
 !docs/index.md
+mkdocs.yml
