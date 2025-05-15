@@ -11,7 +11,8 @@ pip install -r requirements.txt
 
 1. Create a recipe in the appropriate `scripts/` folder. Make sure the heading comment contains a title and a
   description. See [scripts/core/enumerate_segments.py](scripts/core/enumerate_segments.py) for an example.
-2. Add a test in the `tests/` folder.
+2. Make sure your code is linter: `flake8 .`.
+3. Add a test in the `tests/` folder.
 
 ## Run tests
 
