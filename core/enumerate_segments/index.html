@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.13">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
@@ -358,9 +358,8 @@
 
 
 <h1 id="enumerate-segments">Enumerate Segments</h1>
-<p>Walks all segments in the loaded database,
-printing each segment’s name, start/end addresses,
-and permissions.</p>
+<p>Walks all segments in the loaded database, printing each segment’s name,
+start/end addresses, and permissions.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
@@ -375,9 +374,9 @@ and permissions.</p>
 <span class="sd">    Turn the segment permission bits into an R/W/X string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-        <span class="s2">&quot;R&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_READ</span>  <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;R&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_READ</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
         <span class="s2">&quot;W&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_WRITE</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;X&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_EXEC</span>  <span class="k">else</span> <span class="s2">&quot;-&quot;</span>
+        <span class="s2">&quot;X&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_EXEC</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span>
     <span class="p">])</span>
 
 
