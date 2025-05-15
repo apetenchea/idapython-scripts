@@ -7,10 +7,10 @@ import subprocess
 
 @dataclass
 class GlobalConfig:
-   samples = os.path.abspath("samples")
-   logs = os.path.abspath("logs")
-   scripts = os.path.abspath("scripts")
-   ida = "ida"
+    samples = os.path.abspath("samples")
+    logs = os.path.abspath("logs")
+    scripts = os.path.abspath("scripts")
+    ida = "ida"
 
 
 global_config = GlobalConfig()
@@ -66,8 +66,8 @@ def run_ida(ida, scripts, samples, logs):
             script,
             sample,
             output,
-            discard=True,    # discard any existing DB
-            autonomous=True, # autonomous mode
+            discard=True,     # discard any existing DB
+            autonomous=True,  # autonomous mode
             extra_args=None,
     ):
         if extra_args is None:

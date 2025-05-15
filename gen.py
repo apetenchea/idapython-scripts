@@ -27,7 +27,12 @@ def parse_metadata_and_code(py_path: Path):
     return meta, code
 
 
-def convert_file(py_path: Path, input_root: Path, output_root: Path, nav_map: dict):
+def convert_file(
+        py_path: Path,
+        input_root: Path,
+        output_root: Path,
+        nav_map: dict
+):
     try:
         meta, code = parse_metadata_and_code(py_path)
     except Exception as e:
@@ -40,7 +45,7 @@ def convert_file(py_path: Path, input_root: Path, output_root: Path, nav_map: di
     category = out_path.parent.name.capitalize()
 
     title = meta.get("title").strip()
-    desc  = meta.get("description").strip()
+    desc = meta.get("description").strip()
 
     if category not in nav_map:
         nav_map[category] = list()
@@ -105,7 +110,7 @@ def convert_mkdocs(nav_map: dict):
 
     with open("mkdocs.yml", "w") as f:
         yaml.dump(mk, f, sort_keys=False)
-    print(f"Generated mkdocs.yml")
+    print("Generated mkdocs.yml")
 
 
 def convert(input_root: Path, output_root: Path):

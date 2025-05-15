@@ -1,9 +1,8 @@
 """
 title: Enumerate Segments
 description: |
-  Walks all segments in the loaded database,
-  printing each segment’s name, start/end addresses,
-  and permissions.
+  Walks all segments in the loaded database, printing each segment’s name,
+  start/end addresses, and permissions.
 """
 
 import sys
@@ -20,9 +19,9 @@ def format_perms(perm):
     Turn the segment permission bits into an R/W/X string.
     """
     return "".join([
-        "R" if perm & idaapi.SEGPERM_READ  else "-",
+        "R" if perm & idaapi.SEGPERM_READ else "-",
         "W" if perm & idaapi.SEGPERM_WRITE else "-",
-        "X" if perm & idaapi.SEGPERM_EXEC  else "-"
+        "X" if perm & idaapi.SEGPERM_EXEC else "-"
     ])
 
 
