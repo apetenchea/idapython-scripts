@@ -362,8 +362,8 @@
 start/end addresses, and permissions.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_pro</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_segment</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">idaapi</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">idautils</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">idc</span>
@@ -380,18 +380,62 @@ start/end addresses, and permissions.</p>
     <span class="p">])</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
-    <span class="c1"># Wait for the auto-analysis to finish</span>
-    <span class="n">ida_auto</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Turn the segment type into a string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_NORM</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;unknown type, no assumptions&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_XTRN</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with &#39;extern&#39; definitions&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_CODE</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;code segment&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_DATA</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;data segment&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_IMP</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;java: implementation segment&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_GRP</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;group of segments&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_NULL</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;zero-length segment&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_UNDF</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;undefined segment type (not used)&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_BSS</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;uninitialized segment&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_ABSSYM</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with definitions of absolute symbols&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_COMM</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with communal definitions&quot;</span>
+    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_IMEM</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;internal processor memory &amp; sfr (8051)&quot;</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-    <span class="c1"># Iterate over all segments</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="c1"># Iterate over all segments.</span>
+    <span class="c1"># It enumerates the starting address of each segment, in ascending order.</span>
     <span class="k">for</span> <span class="n">ea</span> <span class="ow">in</span> <span class="n">idautils</span><span class="o">.</span><span class="n">Segments</span><span class="p">():</span>
-        <span class="n">seg</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">getseg</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">idc</span><span class="o">.</span><span class="n">get_segm_name</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
+        <span class="c1"># Get the segment object associated with the address.</span>
+        <span class="n">seg</span><span class="p">:</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">segment_t</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">getseg</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
+
+        <span class="c1"># The name property is just an index in a global array of names.</span>
+        <span class="c1"># You need to use the get_segm_name function to get the actual name.</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">get_segm_name</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span>
+
+        <span class="c1"># Each segment has its [start, end) addresses and represents</span>
+        <span class="c1"># a contiguous range. The end address is excluded from the segment.</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">start_ea</span>
         <span class="n">end</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">end_ea</span>
+
+        <span class="c1"># Permissions and type.</span>
         <span class="n">perms</span> <span class="o">=</span> <span class="n">format_perms</span><span class="p">(</span><span class="n">seg</span><span class="o">.</span><span class="n">perm</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">perms</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">format_type</span><span class="p">(</span><span class="n">seg</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">perms</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">typ</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">output</span>
+        <span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
