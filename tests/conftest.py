@@ -65,7 +65,7 @@ def run_ida(ida, scripts, samples, logs):
     def _run(
             script,
             sample,
-            output,
+            output=None,
             discard=True,     # discard any existing DB
             autonomous=True,  # autonomous mode
             extra_ida_args=None,
@@ -78,7 +78,7 @@ def run_ida(ida, scripts, samples, logs):
 
         script = f"{scripts}/{script}"
         sample = f"{samples}/{sample}"
-        output = f"{logs}/{output}"
+        output = f"{logs}/{output}" if output else ''
 
         cmd = [ida]
         if discard:
@@ -96,7 +96,6 @@ def run_ida(ida, scripts, samples, logs):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            check=True
         )
         return proc.returncode
 
