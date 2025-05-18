@@ -29,7 +29,8 @@ def load_pdb(pdb_path):
     # The PDB plugin expects the PDB path in the supval array.
     n.supset(0, pdb_path)
 
-    # 3 = don't ask the user for data, but use the information stored in the netnode.
+    # 3 = don't ask the user for data, but use the information
+    # stored in the netnode.
     if ida_loader.load_and_run_plugin("pdb", 3) == 0:
         raise RuntimeError(f"Failed to load PDB plugin for {pdb_path}")
 
@@ -42,12 +43,12 @@ def main(output, pdb_path):
     ida_auto.auto_wait()
 
     # Snapshot the set of names before loading the PDB.
-    before = { name for ea, name in idautils.Names() }
+    before = {name for ea, name in idautils.Names()}
 
     load_pdb(pdb_path)
 
     # Snapshot again.
-    after = { name for ea, name in idautils.Names() }
+    after = {name for ea, name in idautils.Names()}
 
     # Compute the newly added names.
     new_names = after - before

@@ -86,7 +86,7 @@ def run_ida(ida, scripts, samples, logs):
         if autonomous:
             cmd.append("-A")
         cmd.extend([
-            f"-S{script} {output} {' '.join(extra_plugin_args)}",  # run this script
+            f"-S{script} {output} {' '.join(extra_plugin_args)}",
             sample,
             *extra_ida_args
         ])
