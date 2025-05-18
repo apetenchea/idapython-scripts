@@ -68,10 +68,13 @@ def run_ida(ida, scripts, samples, logs):
             output,
             discard=True,     # discard any existing DB
             autonomous=True,  # autonomous mode
-            extra_args=None,
+            extra_ida_args=None,
+            extra_plugin_args=None,
     ):
-        if extra_args is None:
-            extra_args = []
+        if extra_ida_args is None:
+            extra_ida_args = []
+        if extra_plugin_args is None:
+            extra_plugin_args = []
 
         script = f"{scripts}/{script}"
         sample = f"{samples}/{sample}"
@@ -83,9 +86,9 @@ def run_ida(ida, scripts, samples, logs):
         if autonomous:
             cmd.append("-A")
         cmd.extend([
-            f"-S{script} {output}",  # run this script
+            f"-S{script} {output} {' '.join(extra_plugin_args)}",  # run this script
             sample,
-            *extra_args
+            *extra_ida_args
         ])
 
         proc = subprocess.run(
