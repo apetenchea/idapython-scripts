@@ -14,7 +14,7 @@ def main():
     ida_kernwin.warning("Warning\n")
     ida_kernwin.msg("Message\n")
 
-    # This causes IDA to exit error code 1
+    # `error` causes IDA to exit with error code 1
     ida_kernwin.error("Error\n")
 
 
