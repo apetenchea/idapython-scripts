@@ -10,12 +10,13 @@ import ida_pro
 
 
 def main():
-    ida_kernwin.info("Info\n")
-    ida_kernwin.warning("Warning\n")
-    ida_kernwin.msg("Message\n")
+    ida_kernwin.info("Info")
+    ida_kernwin.warning("Warning")
+    ida_kernwin.msg("Message")
+    ida_kernwin.ask_for_feedback("Feedback about problematic sample")
 
     # `error` causes IDA to exit with error code 1
-    ida_kernwin.error("Error\n")
+    ida_kernwin.error("Error")
 
 
 if __name__ == "__main__":
