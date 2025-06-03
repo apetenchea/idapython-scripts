@@ -15,6 +15,14 @@ def main():
     ida_kernwin.msg("Message")
     ida_kernwin.ask_for_feedback("Feedback about problematic sample")
 
+    # First argument is the default selection.
+    # Second argument is the message to display.
+    # The return value is the selected options.
+    # ida_kernwin.ASKBTN_YES
+    # ida_kernwin.ASKBTN_NO
+    # ida_kernwin.ASKBTN_CANCEL
+    ida_kernwin.ask_yn(ida_kernwin.ASKBTN_YES, "Do you want to continue?")
+
     # `error` causes IDA to exit with error code 1
     ida_kernwin.error("Error")
 
