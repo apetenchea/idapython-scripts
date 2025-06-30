@@ -9,8 +9,10 @@
       
       
       
-        <link rel="prev" href="../../debugger/breakpoints/">
+        <link rel="prev" href="../register_values/">
       
+      
+        <link rel="next" href="../enumerate_segments/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +20,7 @@
     
     
       
-        <title>Log Messages to the Output Window - IDAPython Scripts</title>
+        <title>Discover Code - IDAPython Scripts</title>
       
     
     
@@ -70,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#log-messages-to-the-output-window" class="md-skip">
+        <a href="#discover-code" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Log Messages to the Output Window
+              Discover Code
             
           </span>
         </div>
@@ -315,18 +317,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -342,7 +346,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Core
@@ -356,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/register_values/" class="md-nav__link">
+      <a href="../register_values/" class="md-nav__link">
         
   
   
@@ -376,10 +380,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../core/discover_code/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -390,6 +403,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -402,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/enumerate_segments/" class="md-nav__link">
+      <a href="../enumerate_segments/" class="md-nav__link">
         
   
   
@@ -425,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/segment_registers/" class="md-nav__link">
+      <a href="../segment_registers/" class="md-nav__link">
         
   
   
@@ -520,20 +534,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -549,7 +561,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Misc
@@ -560,19 +572,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../misc/output_logging/" class="md-nav__link">
         
   
   
@@ -583,7 +586,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -630,33 +632,48 @@
 
 
 
-<h1 id="log-messages-to-the-output-window">Log Messages to the Output Window</h1>
-<p>Print something into the Output window (and, if you’ve turned on
-file-logging, into your idalog file).</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_kernwin</span>
+<h1 id="discover-code">Discover Code</h1>
+<p>This script discovers code in the loaded database by creating instructions
+for all unknown bytes in the segments. It is useful for analyzing flash memory
+dumps or other binary data where code may not be automatically recognized.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_pro</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_segment</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_ua</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">idautils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_search</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">idc</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Info&quot;</span><span class="p">)</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Warning&quot;</span><span class="p">)</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="s2">&quot;Message&quot;</span><span class="p">)</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">ask_for_feedback</span><span class="p">(</span><span class="s2">&quot;Feedback about problematic sample&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="c1"># Wait for auto-analysis to finish.</span>
+    <span class="c1"># Usually, this is not needed when working with flash memory dumps,</span>
+    <span class="n">ida_auto</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
 
-    <span class="c1"># First argument is the default selection.</span>
-    <span class="c1"># Second argument is the message to display.</span>
-    <span class="c1"># The return value is the selected options.</span>
-    <span class="c1"># ida_kernwin.ASKBTN_YES</span>
-    <span class="c1"># ida_kernwin.ASKBTN_NO</span>
-    <span class="c1"># ida_kernwin.ASKBTN_CANCEL</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">ask_yn</span><span class="p">(</span><span class="n">ida_kernwin</span><span class="o">.</span><span class="n">ASKBTN_YES</span><span class="p">,</span> <span class="s2">&quot;Do you want to continue?&quot;</span><span class="p">)</span>
+    <span class="c1"># Iterate through all segments</span>
+    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">idautils</span><span class="o">.</span><span class="n">Segments</span><span class="p">():</span>
+        <span class="c1"># Get segment end addresses</span>
+        <span class="n">seg</span><span class="p">:</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">segment_t</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">getseg</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
 
-    <span class="c1"># `error` causes IDA to exit with error code 1</span>
-    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+        <span class="c1"># Create instructions for all unknown bytes in the segment</span>
+        <span class="n">ea</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">while</span> <span class="n">ea</span> <span class="o">&lt;</span> <span class="n">seg</span><span class="o">.</span><span class="n">end_ea</span><span class="p">:</span>
+            <span class="c1"># Create an instruction at the current address.</span>
+            <span class="n">insn_len</span> <span class="o">=</span> <span class="n">ida_ua</span><span class="o">.</span><span class="n">create_insn</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">insn_len</span><span class="p">,</span> <span class="nb">hex</span><span class="p">(</span><span class="n">ea</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+            <span class="c1"># Search for the next unknown byte.</span>
+            <span class="n">ea</span> <span class="o">=</span> <span class="n">ida_search</span><span class="o">.</span><span class="n">find_unknown</span><span class="p">(</span><span class="n">ea</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ida_search</span><span class="o">.</span><span class="n">SEARCH_DOWN</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idc</span><span class="o">.</span><span class="n">ARGV</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">idc</span><span class="o">.</span><span class="n">ARGV</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">main</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
     <span class="n">ida_pro</span><span class="o">.</span><span class="n">qexit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 

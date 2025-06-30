@@ -12,7 +12,7 @@
         <link rel="prev" href="../enumerate_segments/">
       
       
-        <link rel="next" href="../../misc/output_logging/">
+        <link rel="next" href="../../debugger/breakpoints/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -360,6 +360,52 @@
   
   
     <li class="md-nav__item">
+      <a href="../register_values/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Register Values
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../discover_code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Discover Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../enumerate_segments/" class="md-nav__link">
         
   
@@ -439,7 +485,7 @@
   
   
   <span class="md-ellipsis">
-    Misc
+    Debugger
     
   </span>
   
@@ -449,6 +495,74 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Debugger
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../debugger/breakpoints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Breakpoints
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Misc
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Misc
           </label>
@@ -523,6 +637,7 @@
 These are, for example, the T register on ARM, or the TOC register on PowerPC.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_idp</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_pro</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_segment</span>
@@ -531,6 +646,9 @@ These are, for example, the T register on ARM, or the TOC register on PowerPC.</
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="c1"># Wait for auto-analysis to finish.</span>
+    <span class="n">ida_auto</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
+
     <span class="c1"># Get the segment register number for the global segment.</span>
     <span class="n">reg</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">ida_idp</span><span class="o">.</span><span class="n">str2sreg</span><span class="p">(</span><span class="s2">&quot;gs&quot;</span><span class="p">)</span>
 
