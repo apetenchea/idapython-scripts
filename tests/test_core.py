@@ -23,3 +23,13 @@ def test_register_values(run_ida):
         output="register_values.log",
     )
     assert result == 0
+
+
+def test_discover_code(run_ida):
+    result = run_ida(
+        script="core/discover_code.py",
+        sample="83226a8c8c55106a3f6081a9344c749b.pe",
+        output="discover_code.log",
+    )
+    assert result == 0
+
