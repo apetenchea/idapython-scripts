@@ -7,6 +7,7 @@ description: |
 
 import sys
 
+import ida_auto
 import ida_idp
 import ida_pro
 import ida_segment
@@ -15,6 +16,9 @@ import idc
 
 
 def main(output):
+    # Wait for auto-analysis to finish.
+    ida_auto.auto_wait()
+
     # Get the segment register number for the global segment.
     reg: int = ida_idp.str2sreg("gs")
 
