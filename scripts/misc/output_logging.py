@@ -6,10 +6,8 @@ description: |
 """
 
 import ida_kernwin
-import ida_pro
 
-
-def main():
+def output_logging():
     ida_kernwin.info("Info")
     ida_kernwin.warning("Warning")
     ida_kernwin.msg("Message")
@@ -27,6 +25,4 @@ def main():
     ida_kernwin.error("Error")
 
 
-if __name__ == "__main__":
-    main()
-    ida_pro.qexit(0)
+output_logging()

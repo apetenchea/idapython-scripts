@@ -5,17 +5,14 @@ description: |
   These are, for example, the T register on ARM, or the TOC register on PowerPC.
 """
 
-import sys
-
 import ida_auto
 import ida_idp
-import ida_pro
+import ida_kernwin
 import ida_segment
 import ida_segregs
-import idc
 
 
-def main(output):
+def segment_registers():
     # Wait for auto-analysis to finish.
     ida_auto.auto_wait()
 
@@ -27,28 +24,21 @@ def main(output):
 
     # Set the default value of the code segment register for the '.pdata' segment.
     res: bool = ida_segregs.set_default_sreg_value(seg, reg, 0x4000)
-    print(res, file=output)
+    ida_kernwin.msg(f"{res}\n")
 
     # Going from address 0x4624F4 downwards, change the value of the segment register.
     ea = 0x140001A01
     res: bool = ida_segregs.split_sreg_range(ea, reg, 0x401000, ida_segregs.SR_user)
-    print(res, file=output)
+    ida_kernwin.msg(f"{res}\n")
 
     # Get the value of the segment register.
     ea = 0x140001A16
     val: int = ida_segregs.get_sreg(ea, reg)
-    print(hex(val), file=output)
+    ida_kernwin.msg(f"{hex(val)}\n")
 
     # Get how many ranges the segment register has.
     qty: int = ida_segregs.get_sreg_ranges_qty(reg)
-    print(qty, file=output)
+    ida_kernwin.msg(f"{qty}\n")
 
 
-if __name__ == "__main__":
-    if len(idc.ARGV) > 1:
-        with open(idc.ARGV[1], "w") as f:
-            main(f)
-            f.flush()
-    else:
-        main(sys.stdout)
-    ida_pro.qexit(0)
+segment_registers()

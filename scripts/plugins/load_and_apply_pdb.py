@@ -1,15 +1,15 @@
 """
 title: Load & Apply PDB Symbols
 description: |
-  Loads PDB symbols from a file via the PDB plugin, then writes a report
-  of all renamed symbols to disk.
+  Loads PDB symbols from a file via the PDB plugin, then prints a report
+  of all renamed symbols to the Output window.
 """
 
 import ida_auto
+import ida_kernwin
 import ida_loader
 import ida_nalt
 import ida_netnode
-import ida_pro
 import idautils
 import idc
 
@@ -38,9 +38,13 @@ def load_pdb(pdb_path):
     ida_auto.auto_wait()
 
 
-def main(output, pdb_path):
+def load_and_apply_pdb(pdb_path=None):
     # Wait for initial auto-analysis to finish.
     ida_auto.auto_wait()
+
+    if pdb_path is None:
+        ida_kernwin.msg("PDB path not provided\n")
+        return
 
     # Snapshot the set of names before loading the PDB.
     before = {name for ea, name in idautils.Names()}
@@ -56,14 +60,7 @@ def main(output, pdb_path):
     # Write the new names to the output file.
     for ea, name in idautils.Names():
         if name in new_names:
-            print(f"{hex(ea)}: {name}", file=output)
+            ida_kernwin.msg(f"{hex(ea)}: {name}\n")
 
 
-if __name__ == "__main__":
-    if len(idc.ARGV) < 3:
-        print("Usage: load_and_apply_pdb.py <output_path> <pdb_path>")
-        ida_pro.qexit(0)
-    with open(idc.ARGV[1], "w") as f:
-        main(f, idc.ARGV[2])
-        f.flush()
-    ida_pro.qexit(0)
+load_and_apply_pdb()

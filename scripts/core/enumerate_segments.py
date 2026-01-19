@@ -5,13 +5,10 @@ description: |
   start/end addresses, and permissions.
 """
 
-import sys
-
-import ida_pro
 import ida_segment
+import ida_kernwin
 import idaapi
 import idautils
-import idc
 
 
 def format_perms(perm):
@@ -57,7 +54,7 @@ def format_type(typ):
     return result
 
 
-def main(output):
+def enumerate_segments():
     # Iterate over all segments.
     # It enumerates the starting address of each segment, in ascending order.
     for ea in idautils.Segments():
@@ -77,17 +74,7 @@ def main(output):
         perms = format_perms(seg.perm)
         typ = format_type(seg.type)
 
-        print(
-            f"{name}: {hex(start)} - {hex(end)} ({perms}) {typ}",
-            file=output
-        )
+        ida_kernwin.msg(f"{name}: {hex(start)} - {hex(end)} ({perms}) {typ}\n")
 
 
-if __name__ == "__main__":
-    if len(idc.ARGV) > 1:
-        with open(idc.ARGV[1], "w") as f:
-            main(f)
-            f.flush()
-    else:
-        main(sys.stdout)
-    ida_pro.qexit(0)
+enumerate_segments()
