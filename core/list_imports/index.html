@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../segment_registers/">
       
       
-        <link rel="next" href="../../misc/output_logging/">
+        <link rel="next" href="../string_xrefs/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Breakpoints - IDAPython Scripts</title>
+        <title>List Imports - IDAPython Scripts</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#breakpoints" class="md-skip">
+        <a href="#list-imports" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Breakpoints
+              List Imports
             
           </span>
         </div>
@@ -249,20 +249,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -278,7 +276,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Debugger
@@ -289,19 +287,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../debugger/breakpoints/" class="md-nav__link">
         
   
   
@@ -312,7 +301,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -465,18 +453,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -492,7 +482,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Core
@@ -506,7 +496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/register_values/" class="md-nav__link">
+      <a href="../register_values/" class="md-nav__link">
         
   
   
@@ -529,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/list_function_callees/" class="md-nav__link">
+      <a href="../list_function_callees/" class="md-nav__link">
         
   
   
@@ -552,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/enumerate_segments/" class="md-nav__link">
+      <a href="../enumerate_segments/" class="md-nav__link">
         
   
   
@@ -575,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/segment_registers/" class="md-nav__link">
+      <a href="../segment_registers/" class="md-nav__link">
         
   
   
@@ -595,10 +585,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../core/list_imports/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -609,6 +608,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -621,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/string_xrefs/" class="md-nav__link">
+      <a href="../string_xrefs/" class="md-nav__link">
         
   
   
@@ -644,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../core/discover_code/" class="md-nav__link">
+      <a href="../discover_code/" class="md-nav__link">
         
   
   
@@ -701,22 +701,35 @@
 
 
 
-<h1 id="breakpoints">Breakpoints</h1>
-<p>For debugger interaction, the debugger settings need to be configured first.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_dbg</span>
+<h1 id="list-imports">List Imports</h1>
+<p>Enumerates import modules and their imported symbols.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_kernwin</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_nalt</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">set_debugger_breakpoint</span><span class="p">(</span><span class="n">pid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ea</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="c1"># Attach to the process with the given PID.</span>
-    <span class="c1"># The process will be suspended.</span>
-    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">attach_process</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_imports</span><span class="p">():</span>
+    <span class="n">nimps</span> <span class="o">=</span> <span class="n">ida_nalt</span><span class="o">.</span><span class="n">get_import_module_qty</span><span class="p">()</span>
+    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">nimps</span><span class="si">}</span><span class="s2"> import module(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Set a breakpoint at the specified address.</span>
-    <span class="c1"># Later on you can use the `ida_dbg.del_bpt(ea)` function to remove it.</span>
-    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">add_bpt</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nimps</span><span class="p">):</span>
+        <span class="n">module_name</span> <span class="o">=</span> <span class="n">ida_nalt</span><span class="o">.</span><span class="n">get_import_module_name</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&lt;unnamed&gt;&quot;</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Continue the process execution.</span>
-    <span class="n">ida_dbg</span><span class="o">.</span><span class="n">continue_process</span><span class="p">()</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">imp_cb</span><span class="p">(</span><span class="n">ea</span><span class="p">,</span> <span class="n">imp_name</span><span class="p">,</span> <span class="n">ordinal</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">imp_name</span><span class="p">:</span>
+                <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">ea</span><span class="si">:</span><span class="s2">08X</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">imp_name</span><span class="si">}</span><span class="s2"> (ordinal </span><span class="si">{</span><span class="n">ordinal</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">ea</span><span class="si">:</span><span class="s2">08X</span><span class="si">}</span><span class="s2">: ordinal </span><span class="si">{</span><span class="n">ordinal</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="n">ida_nalt</span><span class="o">.</span><span class="n">enum_import_names</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">imp_cb</span><span class="p">)</span>
+
+    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="s2">&quot;All done.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">list_imports</span><span class="p">()</span>
 </code></pre></div>
 
 
