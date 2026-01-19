@@ -180,3 +180,5 @@ cython_debug/
 docs/*
 !docs/index.md
 mkdocs.yml
+
+AGENTS.md
