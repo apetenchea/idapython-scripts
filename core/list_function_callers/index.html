@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../string_xrefs/">
+        <link rel="prev" href="../discover_code/">
       
-      
-        <link rel="next" href="../list_function_callers/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Discover Code - IDAPython Scripts</title>
+        <title>List Function Callers - IDAPython Scripts</title>
       
     
     
@@ -72,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#discover-code" class="md-skip">
+        <a href="#list-function-callers" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Discover Code
+              List Function Callers
             
           </span>
         </div>
@@ -677,6 +675,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../discover_code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Discover Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -694,36 +715,13 @@
   
   
   <span class="md-ellipsis">
-    Discover Code
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../list_function_callers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
     List Function Callers
     
   </span>
   
 
       </a>
+      
     </li>
   
 
@@ -770,39 +768,52 @@
 
 
 
-<h1 id="discover-code">Discover Code</h1>
-<p>This script discovers code in the loaded database by creating instructions
-for all unknown bytes in the segments. It is useful for analyzing flash memory
-dumps or other binary data where code may not be automatically recognized.</p>
+<h1 id="list-function-callers">List Function Callers</h1>
+<p>Lists callers of the function at the cursor, grouped by caller function.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ida_funcs</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_kernwin</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ida_segment</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ida_ua</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">idautils</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ida_search</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">discover_code</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_function_callers</span><span class="p">():</span>
     <span class="c1"># Wait for auto-analysis to finish.</span>
-    <span class="c1"># Usually, this is not needed when working with flash memory dumps,</span>
     <span class="n">ida_auto</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
 
-    <span class="c1"># Iterate through all segments</span>
-    <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="n">idautils</span><span class="o">.</span><span class="n">Segments</span><span class="p">():</span>
-        <span class="c1"># Get segment end addresses</span>
-        <span class="n">seg</span><span class="p">:</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">segment_t</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">getseg</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="n">ea</span> <span class="o">=</span> <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">get_screen_ea</span><span class="p">()</span>
+    <span class="n">callee</span> <span class="o">=</span> <span class="n">ida_funcs</span><span class="o">.</span><span class="n">get_func</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">callee</span><span class="p">:</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="s2">&quot;No function at the cursor.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
 
-        <span class="c1"># Create instructions for all unknown bytes in the segment</span>
-        <span class="n">ea</span> <span class="o">=</span> <span class="n">start</span>
-        <span class="k">while</span> <span class="n">ea</span> <span class="o">&lt;</span> <span class="n">seg</span><span class="o">.</span><span class="n">end_ea</span><span class="p">:</span>
-            <span class="c1"># Create an instruction at the current address.</span>
-            <span class="n">insn_len</span> <span class="o">=</span> <span class="n">ida_ua</span><span class="o">.</span><span class="n">create_insn</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
-            <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">insn_len</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="c1"># Search for the next unknown byte.</span>
-            <span class="n">ea</span> <span class="o">=</span> <span class="n">ida_search</span><span class="o">.</span><span class="n">find_unknown</span><span class="p">(</span><span class="n">ea</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ida_search</span><span class="o">.</span><span class="n">SEARCH_DOWN</span><span class="p">)</span>
+    <span class="n">callers</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">orphans</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">xref</span> <span class="ow">in</span> <span class="n">idautils</span><span class="o">.</span><span class="n">CodeRefsTo</span><span class="p">(</span><span class="n">callee</span><span class="o">.</span><span class="n">start_ea</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">caller</span> <span class="o">=</span> <span class="n">ida_funcs</span><span class="o">.</span><span class="n">get_func</span><span class="p">(</span><span class="n">xref</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">caller</span><span class="p">:</span>
+            <span class="n">callers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">caller</span><span class="o">.</span><span class="n">start_ea</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xref</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">orphans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xref</span><span class="p">)</span>
+
+    <span class="n">callee_name</span> <span class="o">=</span> <span class="n">ida_funcs</span><span class="o">.</span><span class="n">get_func_name</span><span class="p">(</span><span class="n">callee</span><span class="o">.</span><span class="n">start_ea</span><span class="p">)</span>
+    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Callers of </span><span class="si">{</span><span class="n">callee_name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">callee</span><span class="o">.</span><span class="n">start_ea</span><span class="si">:</span><span class="s2">#x</span><span class="si">}</span><span class="s2">):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">callers</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">orphans</span><span class="p">:</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="s2">&quot;  &lt;none&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">for</span> <span class="n">caller_ea</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">callers</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">ida_funcs</span><span class="o">.</span><span class="n">get_func_name</span><span class="p">(</span><span class="n">caller_ea</span><span class="p">)</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">site</span><span class="si">:</span><span class="s2">#x</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">callers</span><span class="p">[</span><span class="n">caller_ea</span><span class="p">]))</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">caller_ea</span><span class="si">:</span><span class="s2">#x</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">sites</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">orphans</span><span class="p">:</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">site</span><span class="si">:</span><span class="s2">#x</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">orphans</span><span class="p">))</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &lt;no_func&gt;: </span><span class="si">{</span><span class="n">sites</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
-<span class="n">discover_code</span><span class="p">()</span>
+<span class="n">list_function_callers</span><span class="p">()</span>
 </code></pre></div>
 
 
