@@ -4,10 +4,3 @@ A growing collection of bite-sized IDAPython scripts and examples for automating
 IDA Pro. Currently work in progress, but feel free to contribute or suggest new ideas!
 
 Source is available [on GitHub](https://github.com/apetenchea/idapython-scripts). Pull requests are welcome!
-
-## Script Categories
-
-- [core](core/)
-- [debugger](debugger/)
-- [misc](misc/)
-- [plugins](plugins/)
