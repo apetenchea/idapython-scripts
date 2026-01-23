@@ -237,6 +237,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -248,6 +261,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#script-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script Categories
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -405,6 +446,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="misc/list_strings_basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List Strings (Basic)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="misc/list_function_comments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List Function Comments
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -525,6 +612,29 @@
   
   
     <li class="md-nav__item">
+      <a href="core/list_entry_points/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List Entry Points
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="core/register_values/" class="md-nav__link">
         
   
@@ -617,6 +727,29 @@
   
   
     <li class="md-nav__item">
+      <a href="core/list_structs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="core/segment_registers/" class="md-nav__link">
         
   
@@ -640,12 +773,58 @@
   
   
     <li class="md-nav__item">
+      <a href="core/netnode_blob_cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netnode Blob Cache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="core/list_imports/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     List Imports
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="core/netnode_inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netnode Inspector
     
   </span>
   
@@ -709,12 +888,58 @@
   
   
     <li class="md-nav__item">
+      <a href="core/list_xrefs_from_cursor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List Xrefs From Cursor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="core/list_function_callers/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     List Function Callers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="core/netnode_function_tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Function Tags via Netnode
     
   </span>
   
@@ -752,6 +977,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#script-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script Categories
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -770,6 +1012,13 @@
 <p>A growing collection of bite-sized IDAPython scripts and examples for automating and extending
 IDA Pro. Currently work in progress, but feel free to contribute or suggest new ideas!</p>
 <p>Source is available <a href="https://github.com/apetenchea/idapython-scripts">on GitHub</a>. Pull requests are welcome!</p>
+<h2 id="script-categories">Script Categories</h2>
+<ul>
+<li><a href="core/">core</a></li>
+<li><a href="debugger/">debugger</a></li>
+<li><a href="misc/">misc</a></li>
+<li><a href="plugins/">plugins</a></li>
+</ul>
 
 
 

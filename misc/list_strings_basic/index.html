@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../list_function_callees/">
+        <link rel="prev" href="../output_logging/">
       
       
-        <link rel="next" href="../trace_reg_values/">
+        <link rel="next" href="../list_function_comments/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Enumerate Segments - IDAPython Scripts</title>
+        <title>List Strings (Basic) - IDAPython Scripts</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enumerate-segments" class="md-skip">
+        <a href="#list-strings-basic" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enumerate Segments
+              List Strings (Basic)
             
           </span>
         </div>
@@ -317,18 +317,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -344,7 +346,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Misc
@@ -358,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/segment_entropy/" class="md-nav__link">
+      <a href="../segment_entropy/" class="md-nav__link">
         
   
   
@@ -381,7 +383,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/output_logging/" class="md-nav__link">
+      <a href="../output_logging/" class="md-nav__link">
         
   
   
@@ -401,10 +403,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../misc/list_strings_basic/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -415,6 +426,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -427,7 +439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../misc/list_function_comments/" class="md-nav__link">
+      <a href="../list_function_comments/" class="md-nav__link">
         
   
   
@@ -522,20 +534,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -551,7 +561,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Core
@@ -565,7 +575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_entry_points/" class="md-nav__link">
+      <a href="../../core/list_entry_points/" class="md-nav__link">
         
   
   
@@ -588,7 +598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../register_values/" class="md-nav__link">
+      <a href="../../core/register_values/" class="md-nav__link">
         
   
   
@@ -611,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_function_callees/" class="md-nav__link">
+      <a href="../../core/list_function_callees/" class="md-nav__link">
         
   
   
@@ -631,19 +641,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../core/enumerate_segments/" class="md-nav__link">
         
   
   
@@ -654,7 +655,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -667,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../trace_reg_values/" class="md-nav__link">
+      <a href="../../core/trace_reg_values/" class="md-nav__link">
         
   
   
@@ -690,7 +690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_structs/" class="md-nav__link">
+      <a href="../../core/list_structs/" class="md-nav__link">
         
   
   
@@ -713,7 +713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../segment_registers/" class="md-nav__link">
+      <a href="../../core/segment_registers/" class="md-nav__link">
         
   
   
@@ -736,7 +736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netnode_blob_cache/" class="md-nav__link">
+      <a href="../../core/netnode_blob_cache/" class="md-nav__link">
         
   
   
@@ -759,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_imports/" class="md-nav__link">
+      <a href="../../core/list_imports/" class="md-nav__link">
         
   
   
@@ -782,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netnode_inspector/" class="md-nav__link">
+      <a href="../../core/netnode_inspector/" class="md-nav__link">
         
   
   
@@ -805,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../string_xrefs/" class="md-nav__link">
+      <a href="../../core/string_xrefs/" class="md-nav__link">
         
   
   
@@ -828,7 +828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../discover_code/" class="md-nav__link">
+      <a href="../../core/discover_code/" class="md-nav__link">
         
   
   
@@ -851,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_xrefs_from_cursor/" class="md-nav__link">
+      <a href="../../core/list_xrefs_from_cursor/" class="md-nav__link">
         
   
   
@@ -874,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../list_function_callers/" class="md-nav__link">
+      <a href="../../core/list_function_callers/" class="md-nav__link">
         
   
   
@@ -897,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../netnode_function_tags/" class="md-nav__link">
+      <a href="../../core/netnode_function_tags/" class="md-nav__link">
         
   
   
@@ -954,82 +954,29 @@
 
 
 
-<h1 id="enumerate-segments">Enumerate Segments</h1>
-<p>Walks all segments in the loaded database, printing each segment’s name,
-start/end addresses, and permissions.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_segment</span>
+<h1 id="list-strings-basic">List Strings (Basic)</h1>
+<p>Enumerates strings recognized by IDA using the current string settings.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ida_auto</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ida_kernwin</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">idaapi</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">idautils</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">format_perms</span><span class="p">(</span><span class="n">perm</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Turn the segment permission bits into an R/W/X string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-        <span class="s2">&quot;R&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_READ</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;W&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_WRITE</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;X&quot;</span> <span class="k">if</span> <span class="n">perm</span> <span class="o">&amp;</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">SEGPERM_EXEC</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span>
-    <span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_strings_basic</span><span class="p">():</span>
+    <span class="c1"># Wait for auto-analysis to finish.</span>
+    <span class="n">ida_auto</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
+
+    <span class="n">strings</span> <span class="o">=</span> <span class="n">idautils</span><span class="o">.</span><span class="n">Strings</span><span class="p">()</span>
+    <span class="n">strings</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">ea</span><span class="si">:</span><span class="s2">#x</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total strings: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">format_type</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Turn the segment type into a string.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_NORM</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;unknown type, no assumptions&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_XTRN</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with &#39;extern&#39; definitions&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_CODE</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;code segment&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_DATA</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;data segment&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_IMP</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;java: implementation segment&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_GRP</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;group of segments&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_NULL</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;zero-length segment&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_UNDF</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;undefined segment type (not used)&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_BSS</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;uninitialized segment&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_ABSSYM</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with definitions of absolute symbols&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_COMM</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;segment with communal definitions&quot;</span>
-    <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">SEG_IMEM</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;internal processor memory &amp; sfr (8051)&quot;</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">enumerate_segments</span><span class="p">():</span>
-    <span class="c1"># Iterate over all segments.</span>
-    <span class="c1"># It enumerates the starting address of each segment, in ascending order.</span>
-    <span class="k">for</span> <span class="n">ea</span> <span class="ow">in</span> <span class="n">idautils</span><span class="o">.</span><span class="n">Segments</span><span class="p">():</span>
-        <span class="c1"># Get the segment object associated with the address.</span>
-        <span class="n">seg</span><span class="p">:</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">segment_t</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">getseg</span><span class="p">(</span><span class="n">ea</span><span class="p">)</span>
-
-        <span class="c1"># The name property is just an index in a global array of names.</span>
-        <span class="c1"># You need to use the get_segm_name function to get the actual name.</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">ida_segment</span><span class="o">.</span><span class="n">get_segm_name</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span>
-
-        <span class="c1"># Each segment has its [start, end) addresses and represents</span>
-        <span class="c1"># a contiguous range. The end address is excluded from the segment.</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">start_ea</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">end_ea</span>
-
-        <span class="c1"># Permissions and type.</span>
-        <span class="n">perms</span> <span class="o">=</span> <span class="n">format_perms</span><span class="p">(</span><span class="n">seg</span><span class="o">.</span><span class="n">perm</span><span class="p">)</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">format_type</span><span class="p">(</span><span class="n">seg</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
-
-        <span class="n">ida_kernwin</span><span class="o">.</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">perms</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">typ</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-
-<span class="n">enumerate_segments</span><span class="p">()</span>
+<span class="n">list_strings_basic</span><span class="p">()</span>
 </code></pre></div>
 
 
